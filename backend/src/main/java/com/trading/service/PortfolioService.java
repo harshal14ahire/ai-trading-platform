@@ -24,7 +24,7 @@ public class PortfolioService {
         this.sessionRepository = sessionRepository;
     }
 
-    public void syncBaselinePortfolio() throws Exception {
+    public void syncBaselinePortfolio() throws com.zerodhatech.kiteconnect.kitehttp.exceptions.KiteException, java.io.IOException, org.json.JSONException {
         // Ensure we have an active session
         BrokerSession session = sessionRepository.findTopByActiveTrueOrderByLoginTimeDesc()
                 .orElseThrow(() -> new RuntimeException("No active broker session found. Please login first."));
@@ -42,8 +42,8 @@ public class PortfolioService {
             protectedHolding.setExchange(holding.exchange);
             protectedHolding.setTradingSymbol(holding.tradingSymbol);
             protectedHolding.setIsin(holding.isin);
-            protectedHolding.setBaselineQuantity(Integer.parseInt(holding.quantity));
-            protectedHolding.setBaselineAveragePrice(Double.parseDouble(holding.averagePrice));
+            protectedHolding.setBaselineQuantity(holding.quantity);
+            protectedHolding.setBaselineAveragePrice(holding.averagePrice);
             protectedHolding.setTimestamp(timestamp);
             protectedHolding.setSource("EQUITY");
             protectedHolding.setPortfolioVersion(version);

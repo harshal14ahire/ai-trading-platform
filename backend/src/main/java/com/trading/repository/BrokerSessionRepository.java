@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface BrokerSessionRepository extends MongoRepository<BrokerSession, String> {
-    Optional<BrokerSession> findTopByOrderByCreatedAtDesc();
+    Optional<BrokerSession> findTopByActiveTrueOrderByLoginTimeDesc();
 }
