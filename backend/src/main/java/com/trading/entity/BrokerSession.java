@@ -1,29 +1,25 @@
 package com.trading.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "broker_sessions")
+@Document(collection = "broker_sessions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class BrokerSession {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, unique = true)
     private String userId;
 
-    @Column(nullable = false, length = 500)
     private String accessToken;
 
-    @Column(nullable = false)
     private LocalDateTime loginTime;
 
     private String publicToken;

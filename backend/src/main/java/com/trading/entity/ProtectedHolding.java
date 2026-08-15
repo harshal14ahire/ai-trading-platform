@@ -1,32 +1,27 @@
 package com.trading.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "protected_holdings")
+@Document(collection = "protected_holdings")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProtectedHolding {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
     private String exchange;
 
-    @Column(nullable = false)
     private String tradingSymbol;
 
-    @Column(nullable = false)
     private String isin;
 
-    @Column(nullable = false)
     private Integer baselineQuantity;
 
     private Double baselineAveragePrice;

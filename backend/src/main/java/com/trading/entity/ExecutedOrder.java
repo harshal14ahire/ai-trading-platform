@@ -1,29 +1,25 @@
 package com.trading.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "executed_orders")
+@Document(collection = "executed_orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExecutedOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, unique = true)
     private String signalId; // Unique ID from Python orchestrator
 
-    @Column(nullable = false)
     private String kiteOrderId; // Order ID returned by Kite API
 
-    @Column(nullable = false)
     private String symbol;
 
     @Column(nullable = false)
