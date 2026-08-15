@@ -3,3 +3,4 @@ redis==5.0.1
 pandas==2.2.0
 numpy==1.26.3
 python-dotenv==1.0.1
+pandas-ta==0.3.14b0
