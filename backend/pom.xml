@@ -14,7 +14,7 @@
     <name>ai-trading-backend</name>
     <description>Backend for AI-Driven Indian Stock Market Autonomous Trading Platform</description>
     <properties>
-        <java.version>25</java.version> <!-- JDK 25 -->
+        <java.version>21</java.version> <!-- JDK 21 (LTS) to fix Docker build -->
     </properties>
     <dependencies>
         <dependency>
