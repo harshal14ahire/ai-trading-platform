@@ -56,8 +56,12 @@ public class KiteAuthController {
             sessionRepository.save(session);
             
             return ResponseEntity.ok("Successfully authenticated. Session generated.");
-        } catch (Exception e) {
+        } catch (com.zerodhatech.kiteconnect.kitehttp.exceptions.KiteException | java.io.IOException e) {
             return ResponseEntity.status(500).body("Error generating session: " + e.getMessage());
+        } catch (org.json.JSONException e) {
+            return ResponseEntity.status(500).body("JSON Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Unexpected error: " + e.getMessage());
         }
     }
 }

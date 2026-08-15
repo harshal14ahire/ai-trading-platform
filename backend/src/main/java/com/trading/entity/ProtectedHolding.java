@@ -1,10 +1,10 @@
 package com.trading.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document(collection = "protected_holdings")
@@ -26,12 +26,9 @@ public class ProtectedHolding {
 
     private Double baselineAveragePrice;
 
-    @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(nullable = false)
     private String source; // "EQUITY" or "MUTUAL_FUND"
 
-    @Column(nullable = false)
     private Integer portfolioVersion;
 }

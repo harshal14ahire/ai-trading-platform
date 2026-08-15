@@ -1,10 +1,10 @@
 package com.trading.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document(collection = "executed_orders")
@@ -22,12 +22,9 @@ public class ExecutedOrder {
 
     private String symbol;
 
-    @Column(nullable = false)
     private String action; // BUY or SELL
 
-    @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
     private LocalDateTime executionTime;
 }
