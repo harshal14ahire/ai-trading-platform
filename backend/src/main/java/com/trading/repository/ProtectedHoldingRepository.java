@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProtectedHoldingRepository extends JpaRepository<ProtectedHolding, Long> {
-    List<ProtectedHolding> findByTradingSymbolAndActiveTrue(String tradingSymbol);
+    List<ProtectedHolding> findByTradingSymbol(String tradingSymbol);
 }
