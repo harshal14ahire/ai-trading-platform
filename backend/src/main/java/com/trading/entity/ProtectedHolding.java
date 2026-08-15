@@ -26,12 +26,9 @@ public class ProtectedHolding {
 
     private Double baselineAveragePrice;
 
-    @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(nullable = false)
     private String source; // "EQUITY" or "MUTUAL_FUND"
 
-    @Column(nullable = false)
     private Integer portfolioVersion;
 }
