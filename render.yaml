@@ -1,0 +1,48 @@
+services:
+  # 1. Java Backend Web Service
+  - type: web
+    name: ai-trading-backend
+    env: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    plan: free # or starter
+    region: ohio
+    envVars:
+      - key: SPRING_DATA_MONGODB_URI
+        sync: false # User must set this manually in Render dashboard
+      - key: KITE_API_KEY
+        sync: false
+      - key: KITE_API_SECRET
+        sync: false
+    healthCheckPath: /actuator/health
+
+  # 2. Redis Cache (Needed for Python Pub/Sub)
+  - type: redis
+    name: ai-trading-redis
+    plan: free
+    region: ohio
+    maxmemoryPolicy: allkeys-lru
+
+  # 3. Python Orchestrator Background Worker
+  - type: worker
+    name: ai-trading-orchestrator
+    env: docker
+    dockerContext: ./ai_agents
+    dockerfilePath: ./ai_agents/Dockerfile
+    plan: starter # Render does not have free workers, requires $7/mo plan
+    region: ohio
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: ai-trading-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: ai-trading-redis
+          property: port
+      - key: JAVA_BACKEND_URL
+        value: https://ai-trading-backend.onrender.com/api/internal/execute
+      - key: INITIAL_TRADING_CAPITAL
+        value: "13000"
